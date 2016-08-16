@@ -39,6 +39,17 @@ public class BackAndForth{
 			}
 		};
 		
-		timer.schedule(task, 1000, INTERVAL);
+		long interval = -1;
+		if(args.length!=0){
+			try{
+				interval = Long.parseLong(args[0]);
+			}catch(NumberFormatException nfe){
+				nfe.printStackTrace();
+			}
+		}
+		if(interval < 0){
+			interval = INTERVAL;
+		}
+		timer.schedule(task, 1000, interval);
 	}
 }
