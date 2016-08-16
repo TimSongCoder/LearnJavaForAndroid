@@ -1,5 +1,7 @@
 public class Classify{
 	public static void main(String[] args){
+		System.out.println("Hello\b");
+		
 		if(args.length != 1){
 			System.err.println("usage: java Classify package-qualified type.");
 			return;
