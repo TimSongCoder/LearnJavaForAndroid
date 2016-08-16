@@ -10,6 +10,7 @@ public class Guess{
 	public static void main(String[] args){
 		Random random = new Random();
 		int number = random.nextInt(26);
+		number += 'a';
 		
 		System.out.println("Please Guess the hidden number in the black box, using lowercase letter a-z representing 0-25:");
 		int userGuess = -1;
@@ -24,12 +25,12 @@ public class Guess{
 			if(userGuess == '\r' || userGuess == '\n'){
 				continue;
 			}
-			if(userGuess - 'a' > number){
+			if(userGuess > number){
 				System.out.println("Too high, guess again:");
-			}else if( userGuess - 'a' < number){
+			}else if( userGuess < number){
 				System.out.println("Too low, guess again:");
 			}
-		}while(userGuess - 'a' != number );
+		}while(userGuess != number );
 		
 		System.out.println("Congratulations, you are right :) The number in the box is: " + (userGuess - 'a'));
 		
