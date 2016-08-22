@@ -29,4 +29,12 @@ class Employee implements Comparable<Employee>{
 	public int compareTo(Employee e){
 		return this.name.compareTo(e.name);
 	}
+	
+	public boolean equals(Object o){
+		if(!(o instanceof Employee)){
+			return false;
+		}
+		Employee obj = (Employee)o;
+		return this.name.equals(obj.name);
+	}
 }
