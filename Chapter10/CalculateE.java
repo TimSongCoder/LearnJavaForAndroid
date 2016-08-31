@@ -42,7 +42,13 @@ public class CalculateE{
 			System.out.println(taskFuture.get());
 			BigDecimal result = taskFuture.get();
 			System.out.println("precision: " + result.precision());
-			System.out.println("number length: " + result.toString().length());
+			System.out.println("number length: " + result.toString().length() + "\n");
+			// To explore the precision and unscaled value
+			BigDecimal quotient = BigDecimal.ONE.divide(new BigDecimal(17), 6, RoundingMode.HALF_UP);
+			System.out.println("quotient: " + quotient);
+			System.out.println("precision: " + quotient.precision());
+			System.out.println("scale: " + quotient.scale());
+			System.out.println("number length: " + quotient.toString().length());
 		}catch(ExecutionException ee){
 			System.err.println("task threw an exception:");
 			System.err.println(ee);
