@@ -29,7 +29,7 @@ class Shared{
 	*/
 	private volatile char c;
 	private volatile boolean available;
-	private final Lock lock;
+	private final ReentrantLock lock;
 	private final Condition condition;
 	
 	Shared(){
@@ -66,7 +66,7 @@ class Shared{
 	}
 	
 	void setSharedChar(char c){
-		System.out.println("setSharedChar: " + lock);
+		System.out.println("setSharedChar: " + lock + lock.getHoldCount());
 		lock.lock();
 		try{
 			while(available){
@@ -82,8 +82,9 @@ class Shared{
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
+			System.out.println("Before setSharedChar unlock: " + lock + lock.getHoldCount()); 
 			lock.unlock();
-			System.out.println("After setSharedChar unlock: " + lock); 
+			System.out.println("After setSharedChar unlock: " + lock + lock.getHoldCount()); 
 			// The lock is still locked by ProducerThread because of holder count not be zero.
 		}
 	}
@@ -91,20 +92,20 @@ class Shared{
 
 class Producer extends Thread{
 	// field lock and shared are final because it's initialized on the main thread and accessed on the other thread.
-	private final Lock lock;
+	private final ReentrantLock lock;
 	
 	private final Shared shared;
 	
 	Producer(Shared s){
 		shared = s;
-		lock = s.getLock();
+		lock = (ReentrantLock)s.getLock();
 		setName("ProducerThread");
 	}
 	
 	@Override
 	public void run(){
 		System.out.println("Producer is starting...");
-		System.out.println("Producer: " + lock);
+		System.out.println("Producer: " + lock + lock.getHoldCount());
 		
 		for(char ch = 'A'; ch<='Z';ch++){
 			lock.lock(); // repeatedly called.
@@ -114,7 +115,7 @@ class Producer extends Thread{
 			}catch(InterruptedException ie){
 				ie.printStackTrace();
 			}
-			System.out.println("Producer afterSetChar: " + lock);
+			System.out.println("Producer afterSetChar: " + lock + lock.getHoldCount());
 			
 			System.out.println(ch + " produced by producer.");
 			lock.unlock();
@@ -125,20 +126,20 @@ class Producer extends Thread{
 }
 
 class Consumer extends Thread{
-	private final Lock lock;
+	private final ReentrantLock lock;
 	
 	private final Shared shared;
 	
 	Consumer(Shared s){
 		shared = s;
-		lock = s.getLock();
+		lock = (ReentrantLock)s.getLock();
 		setName("ConsumerThread");
 	}
 	
 	@Override
 	public void run(){
 		System.out.println("Consumer is starting...");
-		System.out.println("Consumer: " + lock);
+		System.out.println("Consumer: " + lock + lock.getHoldCount());
 		char ch;
 		do{
 			lock.lock();
@@ -148,7 +149,7 @@ class Consumer extends Thread{
 			}catch(InterruptedException ie){
 				ie.printStackTrace();
 			}
-			System.out.println("Consumer afterGetChar: " + lock);
+			System.out.println("Consumer afterGetChar: " + lock + lock.getHoldCount());
 			
 			System.out.println(ch + " consumed by consumer.");
 			lock.unlock();
@@ -157,3 +158,10 @@ class Consumer extends Thread{
 		System.out.println("Consumer is ending...");
 	}
 }
+
+/* About the ReentrantLock.unlock() method doc.
+* Attempts to release this lock.
+* If the current thread is the holder of this lock then the hold count is decremented.
+* If the hold count is now zero then the lock is released.
+* If the current thread is not the holder of this lock then IllegalMonitorStateException is thrown.
+*/
