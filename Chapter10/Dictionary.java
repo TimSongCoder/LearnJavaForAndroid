@@ -28,9 +28,16 @@ public class Dictionary{
 				for(int i=0;i<words.length;i++){
 					writeLock.lock();
 					try{
+						System.out.println();
+						
 						dictionary.put(words[i], definitions[i]);
-						System.out.println("writer storing " + words[i] +  " entry");
+						System.out.println("writer storing " + words[i] +  " entry"+ " from " + Thread.currentThread() + "; owning lock: " + writeLock);
+						
+						System.out.println("writer doing something...");
+						System.out.println("writer doing something...");
+						System.out.println("writer doing something...");
 					}finally{
+						System.out.println("writer releasing the write lock" + "\n");
 						writeLock.unlock();
 					}
 					try{
@@ -50,19 +57,26 @@ public class Dictionary{
 					readLock.lock();
 					try{
 						int index = (int)(Math.random()*words.length);
-						System.out.println("reader accessing " + words[index] + ": " + dictionary.get(words[index]) + " entry");
+						System.out.println("reader accessing " + words[index] + ": " + dictionary.get(words[index]) + " entry" + " from " + Thread.currentThread() + "; owning lock: " + readLock);
 					}finally{
 						readLock.unlock();
 					}
 					try{
-						Thread.sleep((int)(Math.random()*100));
+						Thread.sleep((int)(Math.random()*500));
 					}catch(InterruptedException ie){
 						ie.printStackTrace();
 					}
 				}
 			}
 		};
-		es = Executors.newFixedThreadPool(1);
-		es.submit(reader);
+		final int readerAmount = 5;
+		es = Executors.newFixedThreadPool(readerAmount);
+		for(int i=0;i<readerAmount; i++){
+			es.submit(reader);
+		}
 	}
 }
+
+/* Thread.toString() implementation.
+* [ThreadName , ThreadPriority , ThreadGroupName]
+*/
