@@ -82,9 +82,9 @@ class Shared{
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			System.out.println("Before setSharedChar unlock: " + lock + lock.getHoldCount()); 
+			System.out.println("Before setSharedChar unlock: " + lock + lock.getHoldCount()); // count 2
 			lock.unlock();
-			System.out.println("After setSharedChar unlock: " + lock + lock.getHoldCount()); 
+			System.out.println("After setSharedChar unlock: " + lock + lock.getHoldCount()); // count 1
 			// The lock is still locked by ProducerThread because of holder count not be zero.
 		}
 	}
@@ -149,7 +149,7 @@ class Consumer extends Thread{
 			}catch(InterruptedException ie){
 				ie.printStackTrace();
 			}
-			System.out.println("Consumer afterGetChar: " + lock + lock.getHoldCount());
+			System.out.println("Consumer afterGetChar: " + lock + lock.getHoldCount()); // count 1
 			
 			System.out.println(ch + " consumed by consumer.");
 			lock.unlock();
