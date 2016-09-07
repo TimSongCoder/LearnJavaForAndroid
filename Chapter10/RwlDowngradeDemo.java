@@ -25,11 +25,16 @@ public class RwlDowngradeDemo{
 						rwl.readLock().lock();
 						System.out.println(Thread.currentThread() + " Reading something, " + "with " + rwl.readLock());
 					}
-					
+				}catch(Exception e){
+					e.printStackTrace();
 				}finally{
+					System.out.println(rwl.writeLock() + ", " + rwl.readLock());
 					rwl.writeLock().unlock();
+					System.out.println("WriteLock released: \n" + rwl.writeLock() + ", " + rwl.readLock());
 					rwl.readLock().unlock();
+					System.out.println("ReadLock released: \n" + rwl.writeLock() + ", " + rwl.readLock());
 				}
+				es.shutdown();  // If you want the application end, you need to call the shutdown method otherwise it will be waiting for new runnables.
 			}
 		});
 	}
