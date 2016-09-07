@@ -3,6 +3,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+// Not deadlock, but with potential task-skip because of single acquiring attempt.
 public class DeadReentrantLockSolution{
 	private static volatile boolean isADone = false;
 	private static volatile boolean isBDone = false;
