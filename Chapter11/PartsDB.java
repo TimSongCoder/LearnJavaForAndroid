@@ -66,7 +66,7 @@ public class PartsDB{
 		}else{
 			// add some padding
 			int paddingLen = PART_NUM_LENGTH-sb.length();
-			for(int i=0;i< paddingLen;i++){
+			for(int i=0;i< paddingLen;i++){ // understand the statements pattern; evaluate the last two expressions every iteration.
 				sb.append(" ");
 			}
 		}
@@ -77,7 +77,7 @@ public class PartsDB{
 			sb.setLength(DESC_LENGTH);
 		}else{
 			// add some padding
-			int descLen = DESC_LENGTH-sb.length();
+			int descLen = DESC_LENGTH-sb.length(); // understand the FOR statements pattern; evaluate the last two expressions every iteration.
 			for(int i=0;i<descLen;i++){
 				sb.append(" ");
 			}
