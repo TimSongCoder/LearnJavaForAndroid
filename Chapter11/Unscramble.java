@@ -47,9 +47,8 @@ public class Unscramble{
 		for(int i=0;i<map.length;i++){
 			map[i]=i;
 		}
-		// Shuffle with the same seed and store the index.
+		// Shuffle with the same seed.
 		Random random = new Random(Scramble.RANDOM_SEED);
-		int[] indexMap = new int[map.length];
 		for(int i=0; i<map.length;i++){
 			int randomNum = random.nextInt(map.length);
 			if(randomNum!=i){
@@ -57,9 +56,15 @@ public class Unscramble{
 				map[i] = map[randomNum];
 				map[randomNum] = temp;
 			}
+			
+		}
+		
+		int[] indexMap = new int[map.length];
+		for(int i=0;i<indexMap.length;i++){
 			indexMap[map[i]] = i;
 			// store the index for the corresponding element map[i] in the indexMap array. 
 		}
+			
 		return indexMap;
 	}
 }
@@ -89,7 +94,7 @@ class UnscrambleInputStream extends FilterInputStream{
 		int readResult = in.read(b, offset, length);
 		// in is inherited from Ancestor class
 		if(readResult!=-1){
-			for(int i=offset;i<readResult;i++){
+			for(int i=offset;i<readResult+offset;i++){
 				b[i] = (byte)map[b[i]];
 			}
 		}
