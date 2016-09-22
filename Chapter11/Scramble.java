@@ -26,6 +26,8 @@ class ScrambledOutputStream extends FilterOutputStream{
 }
 
 public class Scramble{
+	public static final int RANDOM_SEED = 0;
+	
 	public static void main(String[] args){
 		if(args.length != 2){
 			System.err.println("usage: java Scramble srcpath destpath");
@@ -67,12 +69,15 @@ public class Scramble{
 			map[i] = i;
 		}
 		// shuffle the map
-		Random random = new Random(0); // Specified seed intentionally to retrive the identical map when operating decryption.
+		Random random = new Random(RANDOM_SEED); 
+		// Specified seed intentionally to retrive the identical map when operating decryption.
 		for(int i=0;i<map.length;i++){
 			int index = random.nextInt(map.length);
-			int temp = map[index];
-			map[index] = map[i];
-			map[i] = temp;
+			if(index!=i){
+				int temp = map[index];
+				map[index] = map[i];
+				map[i] = temp;
+			}
 		}
 		return map;
 	}
