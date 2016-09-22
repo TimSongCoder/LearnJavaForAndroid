@@ -18,9 +18,16 @@ public class Unscramble{
 			FileInputStream fis = new FileInputStream(args[0]);
 			uis = new UnscrambleInputStream(fis, makeMap());
 			fos = new FileOutputStream(args[1]);
-			int b;
+			/*int b;
 			while((b=uis.read())!=-1){
 				fos.write(b);
+			}
+			*/
+			// test the byte[] read method
+			byte[] bytes = new byte[128];
+			int readLength;
+			while((readLength= uis.read(bytes, 0, bytes.length))!=-1){
+				fos.write(bytes, 0, readLength);
 			}
 		}catch(IOException ioe){
 			ioe.printStackTrace();
@@ -95,7 +102,9 @@ class UnscrambleInputStream extends FilterInputStream{
 		// in is inherited from Ancestor class
 		if(readResult!=-1){
 			for(int i=offset;i<readResult+offset;i++){
-				b[i] = (byte)map[b[i]];
+				int byteValue = Byte.toUnsignedInt(b[i]);
+				// need conversion, otherwise you may encounter IndexOutOfBoundsException because of negative int number
+				b[i] = (byte)map[byteValue];
 			}
 		}
 		return readResult;
