@@ -15,6 +15,7 @@ public class SerializationDemo{
 			oos = new ObjectOutputStream(fos);
 			Employee emp = new Employee("John Doe", 36);
 			oos.writeObject(emp);
+			oos.writeInt(89757);
 			oos.close();
 			oos = null;
 			
@@ -23,6 +24,7 @@ public class SerializationDemo{
 			emp = (Employee)ois.readObject();
 			System.out.println("Deserialization: " + emp.getName());
 			System.out.println("Deserialization: " + emp.getAge());
+			System.out.println("BONUS: " + ois.readInt());
 		}catch(IOException ioe){
 			ioe.printStackTrace();
 		}catch(ClassNotFoundException cnfe){
