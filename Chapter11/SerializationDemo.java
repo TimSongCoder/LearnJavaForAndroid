@@ -28,6 +28,7 @@ public class SerializationDemo{
 			System.out.println("Deserialization: " + emp.getName());
 			System.out.println("Deserialization: " + emp.getAge());
 			System.out.println("Deserialization: " + emp.getSalary()); // output 0 as default initial value.
+			System.out.println("Deserialization: " + emp.getBonus());  // transient field compatible: output 0.
 			System.out.println("BONUS: " + ois.readInt());
 		}catch(IOException ioe){
 			ioe.printStackTrace();
