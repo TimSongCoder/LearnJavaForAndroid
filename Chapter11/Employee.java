@@ -5,10 +5,13 @@ public class Employee implements Serializable{
 	
 	private String name;
 	private int age;
+	// test compatible change with Deserialization
+	private int salary;
 	
-	public Employee(String name, int age){
+	public Employee(String name, int age, int salary){
 		this.name = name;
 		this.age = age;
+		this.salary = salary;
 	}
 	
 	public String getName(){
@@ -17,5 +20,9 @@ public class Employee implements Serializable{
 	
 	public int getAge(){
 		return age;
+	}
+	
+	public int getSalary(){
+		return salary;
 	}
 }
