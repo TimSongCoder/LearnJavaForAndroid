@@ -27,7 +27,7 @@ public class SerializationDemo{
 			emp = (Employee)ois.readObject();
 			System.out.println("Deserialization: " + emp.getName());
 			System.out.println("Deserialization: " + emp.getAge());
-			System.out.println("Deserialization: " + emp.getSalary());
+			System.out.println("Deserialization: " + emp.getSalary()); // output 0 as default initial value.
 			System.out.println("BONUS: " + ois.readInt());
 		}catch(IOException ioe){
 			ioe.printStackTrace();
