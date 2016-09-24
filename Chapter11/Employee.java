@@ -1,6 +1,8 @@
 import java.io.Serializable;
 
 public class Employee implements Serializable{
+	private static final long serialVersionUID = 1517331364702470316L;
+	
 	private String name;
 	private int age;
 	
