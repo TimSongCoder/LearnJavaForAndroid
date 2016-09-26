@@ -20,9 +20,27 @@ class Employee{
 }
 
 // A walkaround to solve the non-serializable super class
-class SerEmployee extends Employee implements Serializable{
+class SerEmployee implements Serializable{
+	private Employee emp;
+	private String name;
+	
 	SerEmployee(String name){
-		super(name);
+		this.name = name;
+		emp = new Employee(name);
+	}
+	
+	private void readObject(ObjectInputStream ois) throws IOException{
+		name = ois.readUTF();
+		emp = new Employee(name);
+	}
+	
+	private void writeObject(ObjectOutputStream oos) throws IOException{
+		oos.writeUTF(name);
+	}
+	
+	@Override
+	public String toString(){
+		return name;
 	}
 }
 
