@@ -10,12 +10,13 @@ public class RedirectIODemo{
 			return;
 		}
 		System.setIn(new FileInputStream(args[0]));
-		System.setOut(new PrintStream(args[1], "gbk"));
+		System.setOut(new PrintStream(args[1]));
 		System.setErr(new PrintStream(args[2]));
 		
 		int ch;
 		while((ch=System.in.read())!=-1){
-			System.out.print((char)ch);
+			//System.out.print((char)ch); // with charset problem
+			System.out.write(ch);
 		}
 		
 		System.err.println("This is error log.");
