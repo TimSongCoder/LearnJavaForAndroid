@@ -6,7 +6,7 @@ import java.net.DatagramPacket;
 /* MulticastSocket is used on the client-side to listen for packets that
 * the server broadcasts to multiple clients.
 * @see <a href="https://docs.oracle.com/javase/tutorial/networking/datagrams/broadcasting.html">The Oracle doc has a related tutorial to reference.</a>
-/
+*/
 public class MulticastSocketClient{
 	public static final String MULTICAST_GROUP_IP = "233.0.0.1";
 	public static final int MULTICAST_GROUP_PORT = 10000;
