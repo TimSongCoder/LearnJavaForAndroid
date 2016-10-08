@@ -11,18 +11,14 @@ public class MulticastSocketClient{
 		MulticastSocket mcs = new MulticastSocket(MULTICAST_GROUP_PORT);
 		InetAddress groupAddr = InetAddress.getByName(MULTICAST_GROUP_IP);
 		mcs.joinGroup(groupAddr);
-		byte[] buffer = new byte[128]; // limited message length, just for demo.
-		DatagramPacket dgp = new DatagramPacket(buffer, buffer.length, groupAddr, MULTICAST_GROUP_PORT);
-		if(args.length > 0){
-			String message = args[0];
-			byte[] msgBytes = message.getBytes();
-			dgp.setData(msgBytes);
-			mcs.send(dgp);
-		}
+		byte[] buffer = new byte[128]; // limited message length, just for demenstration.
+		DatagramPacket dgp = new DatagramPacket(buffer, buffer.length);
+		byte[] validReceiveBytes;
 		while(true){
 			mcs.receive(dgp);
-			//System.out.println(dgp.getSocketAddress() + ": " + new String(dgp.getData()));
-			System.out.println(new String(dgp.getData()));
+			validReceiveBytes = new byte[dgp.getLength()];
+			System.arraycopy(dgp.getData(), 0, validReceiveBytes, 0, validReceiveBytes.length);
+			System.out.println(dgp.getSocketAddress() + ": " + new String(validReceiveBytes));
 		}
 	}
 }
