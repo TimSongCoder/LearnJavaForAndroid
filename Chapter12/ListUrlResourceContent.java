@@ -5,11 +5,11 @@ import java.net.URL;
 import java.net.MalformedURLException;
 import java.net.URLConnection;
 import java.io.IOException;
-/*
-* @see <a href="https://docs.oracle.com/javase/7/docs/api/java/net/URLConnection.html">URLConnection doc</a>
-* @see <a href="https://docs.oracle.com/javase/7/docs/api/java/net/HttpURLConnection.html">HttpURLConnection doc</a>
-* @see <a href="https://docs.oracle.com/javase/7/docs/api/java/net/JarURLConnection.html">JarURLConnection doc, very detailed.</a>
-*/
+/**
+ * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/net/URLConnection.html">URLConnection doc</a>
+ * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/net/HttpURLConnection.html">HttpURLConnection doc</a>
+ * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/net/JarURLConnection.html">JarURLConnection doc, very detailed.</a>
+ */
 public class ListUrlResourceContent{
 	public static void main(String[] args){
 		if(args.length!=1){
