@@ -22,6 +22,7 @@ public class EchoServer{
 			ioe.printStackTrace();
 			return;
 		}
+		File indicatingFile = new File("kill"); // Just represents file path.
 		do{
 			try{
 				Socket socket = ss.accept();
@@ -41,7 +42,7 @@ public class EchoServer{
 			}catch(IOException ioe){
 				ioe.printStackTrace();
 			}
-		}while(!commandKill());
+		}while(!commandKill(indicatingFile));
 		if(ss!=null){
 			try{
 				ss.close();
@@ -51,13 +52,8 @@ public class EchoServer{
 		}
 	}
 	
-	static boolean commandKill(){
-		File dir = new File("."); // The current directory where server application residence.
-		File[] files = dir.listFiles(new FilenameFilter(){
-			public boolean accept(File dir, String name){
-				return "kill".equals(name) && new File(dir, name).isFile();
-			}
-		});
-		return files!=null && files.length>0; 
+	static boolean commandKill(File file){
+		return file.exists() && file.isFile();
+		// Just need to verify the existence of the single interesting file, not need to use filter.
 	}
 }
