@@ -15,7 +15,7 @@ public class MappedByteBufferDemo{
 		FileChannel fc = raf.getChannel();
 		long size = fc.size();
 		System.out.println("Size: " + size);
-		MappedByteBuffer mbb = fc.map(FileChannel.MapMode.READ_WRITE, 0, size);
+		MappedByteBuffer mbb = fc.map(FileChannel.MapMode.PRIVATE, 0, size);
 		while(mbb.hasRemaining()){
 			System.out.print((char)mbb.get());
 		}
