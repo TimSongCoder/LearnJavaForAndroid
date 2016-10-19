@@ -1,5 +1,6 @@
 import java.nio.channels.DatagramChannel;
 import java.nio.ByteBuffer;
+import java.nio.FloatBuffer;
 
 import java.io.IOException;
 
@@ -17,9 +18,11 @@ public class DatagramChannelServer{
 		dc.bind(new InetSocketAddress(SERVER_HOST, SERVER_PORT));
 		ByteBuffer symbolBuffer = ByteBuffer.allocate(4);
 		ByteBuffer payload = ByteBuffer.allocate(16);
+		FloatBuffer floatView = payload.asFloatBuffer();
 		while(true){
 			// prepare for buffer read/write
 			payload.clear();
+			floatView.clear();
 			symbolBuffer.clear();
 			SocketAddress sa = dc.receive(symbolBuffer); // blocing mode
 			if(sa == null){
@@ -32,9 +35,9 @@ public class DatagramChannelServer{
 			// Didn't use hasArray() method to verify the existing of backing array because of the buffer's instantiation manner with control
 			System.out.println("Stock Symbol: " + stockSymbol);
 			if("MSFT".equals(stockSymbol.toUpperCase())){
-				payload.putFloat(0, 37.40f).putFloat(4, 37.22f).putFloat(8, 37.48f).putFloat(12, 37.41f);
+				floatView.put(37.40f).put(37.22f).put(37.48f).put(37.41f);
 			}else{
-				payload.putFloat(0, 0.0f).putFloat(4, 0.0f).putFloat(8, 0.0f).putFloat(12, 0.0f);
+				floatView.put(0.0f).put(0.0f).put(0.0f).put(0.0f);  // the backing byte buffer can see the change, too.
 			}
 			// response to client, send() method can only handle ByteBuffer.
 			dc.send(payload, sa);

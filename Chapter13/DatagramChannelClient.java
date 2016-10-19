@@ -20,8 +20,9 @@ public class DatagramChannelClient{
 		dc.send(symbolBuffer, serverAddress);
 		
 		// receive the server response
-		System.out.println("Receiving datagram from " + dc.receive(response));  // blocing mode
-		System.out.println("Open price: " + response.getFloat(0));
+		System.out.println("Receiving datagram from " + dc.receive(response));  // blocking mode
+		System.out.println("Open price: " + response.getFloat(0));  
+		// can use FloatBuffer as view buffer to manipulate the element in float like the server implementation.
 		System.out.println("Low price: " + response.getFloat(4));
 		System.out.println("High price: " + response.getFloat(8));
 		System.out.println("Close price: " + response.getFloat(12));
