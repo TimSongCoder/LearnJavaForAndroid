@@ -1,7 +1,7 @@
 ----------------------------------------------------------------
-Thu Oct 27 09:22:35 CST 2016:
+Thu Oct 27 11:03:37 CST 2016:
 正在使用类加载程序 sun.misc.Launcher$AppClassLoader@5e481248 引导数据库
-目录 E:\LearnJavaForAndroid\Exercise\Chapter14\employee3 中的 Derby 版本 The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631) 实例 a816c00e-0158-03bb-4903-00000e9d9f80
+目录 E:\LearnJavaForAndroid\Exercise\Chapter14\employee4 中的 Derby 版本 The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631) 实例 a816c00e-0158-0417-c87d-00000e9d9f68
 已从 file:/C:/Program%20Files/Java/jdk1.8.0_45/db/lib/derby.jar 加载
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_45-b15
