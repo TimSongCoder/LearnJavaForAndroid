@@ -8,7 +8,7 @@
 	</h:head>
 	<h:body>
 		<r:recipe>
-			<r:title>Grilled Cheese Sandwich</r:title>
+			<r:title h:style="color:blue;">Grilled Cheese Sandwich</r:title>
 			<r:ingredients>
 				<h:ul>
 					<h:li>
