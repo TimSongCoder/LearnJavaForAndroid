@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!-- A document type declarations with internal DTD(Document Type Definition) -->
+<!DOCTYPE recipe [
+	<!ELEMENT recipe (title, ingredients, instructions)>
+	<!ELEMENT title (#PCDATA)>
+	<!ELEMENT ingredients (ingredient+)>
+	<!ELEMENT ingredient (#PCDATA)>
+	<!ELEMENT instructions (#PCDATA)>
+	<!ATTLIST ingredient qty CDATA "1">
+]>
+<!-- The XML parser will validate the document according the DTD declared. -->
+<recipe>
+	<!-- ... Child elements are ommited for brevity. -->
+</recipe>
