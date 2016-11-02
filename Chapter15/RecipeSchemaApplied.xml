@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<recipe xmlns="http://www.tutortutor.ca"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.tutortutor.ca/Schemas Recipe.xsd">
+	<!-- ... The content elements are ommited here for brevity. -->
+</recipe>
