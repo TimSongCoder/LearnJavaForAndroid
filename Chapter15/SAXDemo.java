@@ -1,5 +1,9 @@
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.File;
+
+import java.util.Map;
+import java.util.HashMap;
 
 import org.xml.sax.XMLReader;
 import org.xml.sax.Attributes;
@@ -38,6 +42,19 @@ public class SAXDemo{
 class Handler extends DefaultHandler2{
 	private Locator locator;
 	
+	private Map<String, String> dtdMapping;
+
+	Handler(){
+		super();
+		// Improve the entity resolve efficiency through local dtd resource.
+		File file = new File("recipeml.dtd");
+		if(file.exists()&&file.isFile()){
+			dtdMapping = new HashMap<String, String>();
+			dtdMapping.put("-//FormatData//DTD RecipeML 0.5//EN", "recipeml.dtd"); 
+			// the DTD file is in current directory
+		}
+	}
+
 	@Override
 	public void characters(char[] ch, int start, int length){
 		System.out.print("characters() [");
@@ -126,8 +143,14 @@ class Handler extends DefaultHandler2{
 		// Do not perform a remapping.
 		InputSource is = new InputSource();
 		is.setPublicId(publicId);
-		is.setSystemId(systemId);
-		return is;
+		if(dtdMapping!=null&&dtdMapping.containsKey(publicId)){
+			is.setSystemId(dtdMapping.get(publicId));
+			System.out.println("obtaining cached local recipeml.dtd");
+		}else{
+			is.setSystemId(systemId);
+		}
+		return is; 
+		// if you return null here, it's equavilent to request the parser to use system identifier.
 	}
 	
 	@Override
