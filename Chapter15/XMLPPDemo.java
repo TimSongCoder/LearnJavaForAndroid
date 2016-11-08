@@ -1,8 +1,12 @@
 import java.io.FileReader;
 import java.io.IOException;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserFactory;
+import org.xmlpull.v1.XmlPullParserException;
+
 public class XMLPPDemo{
-	
+
 	public static void main(String[] args) throws IOException, XmlPullParserException{
 		if(args.length!=1){
 			System.err.println("usage: java XMLPPDemo xmlfile");
@@ -10,8 +14,8 @@ public class XMLPPDemo{
 		}
 		XmlPullParserFactory xmppFactory = XmlPullParserFactory.newInstance();
 		xmppFactory.setNamespaceAware(true);
-		xmlPullParser xmlpp = xmppFactory.newPullParser();
-		
+		XmlPullParser xmlpp = xmppFactory.newPullParser();
+
 		xmlpp.setInput(new FileReader(args[0]));
 		int eventType = xmlpp.getEventType();
 		while(eventType!=XmlPullParser.END_DOCUMENT){
@@ -25,7 +29,7 @@ public class XMLPPDemo{
 			 	case XmlPullParser.TEXT:
 			 		System.out.println("Text: " + xmlpp.getText());
 			 		break;
-			 	case XmlPullParser.ENT_TAG:
+			 	case XmlPullParser.END_TAG:
 			 		System.out.println("End tag: " + xmlpp.getName());
 			}
 			eventType = xmlpp.next();
