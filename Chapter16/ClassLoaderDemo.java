@@ -6,7 +6,8 @@ import java.net.URL;
 import java.net.URLClassLoader;
 
 public class ClassLoaderDemo{
-	final static String _URL_ = "file:///" + System.getProperty("user.dir") + "/x/";
+	final static String URL_X = "file:///" + System.getProperty("user.dir") + "/x/";
+	final static String URL_Y = "file:///" + System.getProperty("user.dir") + "/y/";
 	
 	public static void main(String[] args){
 		boolean init = true;
@@ -14,11 +15,25 @@ public class ClassLoaderDemo{
 			init = false;
 		}
 		try{
-			URL[] urls =new URL[]{new URL(_URL_)};
+			URL[] urls =new URL[]{new URL(URL_X)};
 			URLClassLoader urlc = new URLClassLoader(urls);
-			Class<?> clazz = Class.forName("Hello", init, urlc);
+			Class<?> clazz = Class.forName("Version", init, urlc);
 			System.out.println(clazz.getClassLoader());
 			run(clazz);
+			
+			URL[] urls2 = new URL[]{new URL(URL_Y)};
+			URLClassLoader urlc2 = new URLClassLoader(urls2);
+			Class<?> clazz2 = Class.forName("Version", init, urlc2);
+			System.out.println(clazz2.getClassLoader());
+			run(clazz2);
+			
+			//run(Thread.currentThread().getContextClassLoader().loadClass("Version"));
+			
+			Thread.currentThread().setContextClassLoader(urlc);
+			
+			run(Thread.currentThread().getContextClassLoader().loadClass("Version"));
+			
+			run(Class.forName("Version"));
 		}catch(ClassNotFoundException | MalformedURLException classLoadException){
 			classLoadException.printStackTrace();
 		}
