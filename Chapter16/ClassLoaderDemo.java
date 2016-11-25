@@ -33,6 +33,8 @@ public class ClassLoaderDemo{
 			
 			run(Thread.currentThread().getContextClassLoader().loadClass("Version"));
 			
+			run(ClassLoader.getSystemClassLoader().loadClass("Version"));
+			
 			run(Class.forName("Version"));
 		}catch(ClassNotFoundException | MalformedURLException classLoadException){
 			classLoadException.printStackTrace();
