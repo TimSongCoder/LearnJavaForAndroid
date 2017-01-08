@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="GBK" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2017-01-08T12:29:19</date>
+  <millis>1483849759882</millis>
+  <sequence>0</sequence>
+  <logger>LoggingErrorManageDemo</logger>
+  <level>WARNING</level>
+  <class>LoggingErrorManageDemo</class>
+  <method>main</method>
+  <thread>1</thread>
+  <message>0</message>
+</record>
+<record>
+  <date>2017-01-08T12:29:19</date>
+  <millis>1483849759928</millis>
+  <sequence>1</sequence>
+  <logger>LoggingErrorManageDemo</logger>
+  <level>WARNING</level>
+  <class>LoggingErrorManageDemo</class>
+  <method>main</method>
+  <thread>1</thread>
+  <message>1</message>
+</record>
+<record>
+  <date>2017-01-08T12:29:19</date>
+  <millis>1483849759930</millis>
+  <sequence>2</sequence>
+  <logger>LoggingErrorManageDemo</logger>
+  <level>WARNING</level>
+  <class>LoggingErrorManageDemo</class>
+  <method>main</method>
+  <thread>1</thread>
+  <message>2</message>
+</record>
+<record>
+  <date>2017-01-08T12:29:19</date>
+  <millis>1483849759932</millis>
+  <sequence>3</sequence>
+  <logger>LoggingErrorManageDemo</logger>
+  <level>WARNING</level>
+  <class>LoggingErrorManageDemo</class>
+  <method>main</method>
+  <thread>1</thread>
+  <message>3</message>
+</record>
+<record>
+  <date>2017-01-08T12:29:19</date>
+  <millis>1483849759933</millis>
+  <sequence>4</sequence>
+  <logger>LoggingErrorManageDemo</logger>
+  <level>WARNING</level>
+  <class>LoggingErrorManageDemo</class>
+  <method>main</method>
+  <thread>1</thread>
+  <message>4</message>
+</record>
+<record>
+  <date>2017-01-08T12:29:19</date>
+  <millis>1483849759936</millis>
+  <sequence>5</sequence>
+  <logger>LoggingErrorManageDemo</logger>
+  <level>INFO</level>
+  <class>LoggingErrorManageDemo</class>
+  <method>main</method>
+  <thread>1</thread>
+  <message>CAN NOT UNISTALL PRE-INSTALLED APP ON SAMSUNG.
+</message>
+</record>
+</log>
